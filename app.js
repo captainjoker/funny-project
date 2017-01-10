@@ -36,8 +36,8 @@ var server = {
 				}
 			});
 
-		}).listen(80);
-		console.log('服务80端口已启动');
+		}).listen(3000);
+		console.log('服务3000端口已启动');
 	}
 
 };

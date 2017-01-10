@@ -69,11 +69,42 @@ ul{
 	margin-top:-4rem;
 	box-shadow: 1px 0px 5px 3px #eee;
 }
+#music{
+	margin: 3rem 3rem 0 3rem;
+}
 
 .container{
-	width:68.6rem;
-	margin:0 auto;
+	width:100%;
+	padding-left: 32rem;
+	padding: 2rem 2rem 2rem 32rem;
 	height: 100%;
-	position: relative;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
