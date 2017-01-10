@@ -1,0 +1,79 @@
+html,body{
+	overflow-x: hidden;
+	font:14px/1.5 "Microsoft YaHei",'PingFang SC',Arial,sans-serif;
+	-webkit-tap-highlight-color: transparent;
+	height: 100%;
+}
+body{
+	padding-top: 4rem !important;
+	background: #f5f5f5;
+}
+blockquote,aside, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul ,div{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+	text-decoration: none;
+	color:#000;
+}
+ul{
+	list-style: none;
+}
+.header{
+	position: fixed;
+	width: 100%;
+	background: #fff;
+	height: 4rem;
+	margin-top:-4rem;
+	box-shadow: 0 1px 5px 3px #eee;
+	line-height: 4rem;
+	font-size: 0;
+	z-index: 99;
+}
+
+.header img{
+	width: 3rem;
+	height: 3rem;
+	object-fit: fit;
+	position: absolute;
+	top:50%;
+	border-radius: 50%;
+	transform: translate(50%,-50%);
+	-webkit-transform: translate(50%,-50%);
+	-moz-transform: translate(50%,-50%);
+	-o-transform: translate(50%,-50%);
+	-ms-transform: translate(50%,-50%);
+}
+
+.navbar{
+	font-size: 1.25rem;
+	margin-left:6rem;
+}
+.navbar{
+	display: inline-block;
+}
+.navbar li{
+	display: inline-block;
+	vertical-align: bottom;
+	min-width: 4rem;
+	cursor: pointer;
+}
+
+.music{
+	width: 30rem;
+	height: 100%;
+	background: #fff;
+	position: fixed;
+	padding-top: 4rem;
+	margin-top:-4rem;
+	box-shadow: 1px 0px 5px 3px #eee;
+}
+
+.container{
+	width:68.6rem;
+	margin:0 auto;
+	height: 100%;
+	position: relative;
+}
+
