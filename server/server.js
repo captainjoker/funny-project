@@ -10,7 +10,7 @@ var server = {
 		http.createServer(function(req, res) {
 			var url = parse(req.url);
 			console.log('url.pathname:'+url.pathname);
-			var pathname = (url.pathname=='\/' || url.pathname=='\\' || !url.pathname) ? 'index.html':url.pathname.replace(/\.\./g,'');
+			var pathname = (url.pathname=='/' || !url.pathname) ? 'index.html':url.pathname.replace(/\.\./g,'');
 			console.log('pathname:'+pathname);
 			var path = join(root, 'src', pathname);
 			console.log(path);
@@ -31,7 +31,7 @@ var server = {
 					stream.on('error', function(err) {
 						res.statusCode = 500;
 						res.end('Internal Server Error');
-						console.log('找不到静态文件');
+						console.log('Not Found');
 					});
 				}
 			});
@@ -42,6 +42,5 @@ var server = {
 
 };
 
-server.run();
 
 module.exports = server;
