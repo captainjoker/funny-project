@@ -18,10 +18,23 @@
 		</nav>
 	</header>
 	<aside class="music" id="musicContainer">
-		<canvas id=music></canvas>
+		<div class="cdContainer">
+			<img src="./img/music2.jpg" alt="" id="cd" class="cd cdAnimation">
+		</div>
+		<div class="music-controll">
+			<audio src="./music/music1.mp3" autoplay="true" id="music"></audio>
+			<button type="button" class="music-controll-play js-music-play">播放</button>
+			<button type="button" class="music-controll-pause js-music-pause">暂停</button>
+			<div class="music-controll-process js-music-process">
+				<div class="music-controll-buffer js-music-buffer">
+					<div class="music-controll-bar js-music-bar"></div>
+				</div>
+			</div>
+		</div>
+
 	</aside>
 	<div class="container">
-		请多多关照
+		正在努力打造。。。。。。
 	</div>
 	<footer></footer>
 	<script type="text/javascript" src="./js/index.js"></script>
