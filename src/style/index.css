@@ -30,6 +30,7 @@ ul{
 	line-height: 4rem;
 	font-size: 0;
 	z-index: 99;
+	padding-left: 30rem;
 }
 
 .header img{
@@ -68,6 +69,7 @@ ul{
 	padding-top: 4rem;
 	margin-top:-4rem;
 	box-shadow: 1px 0px 5px 3px #eee;
+	z-index: 101;
 }
 .cdContainer{
 	width: 30rem;
@@ -92,6 +94,10 @@ ul{
 		transform: rotate(360deg);
 	}
 }
+.music-controll{
+	text-align: center;
+}
+
 .music-controll-process{
 	margin:1rem auto;
 	height: 0.5rem;

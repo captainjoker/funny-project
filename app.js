@@ -13,7 +13,7 @@ var server = {
 			var pathname = (url.pathname=='\/' || url.pathname=='\\' || !url.pathname) ? 'index.html':url.pathname.replace(/\.\./g,'');
 			console.log('pathname:'+pathname);
 			var path = join(root, 'src', pathname);
-			console.log(path);
+			console.log('root'+root);
 			fs.stat(path, function(err, stat) {
 				if (err) {
 					if (err.code == 'ENOENT') {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试一千个js文件</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function appendScript(jsName){
+			var script = document.createElement('script');
+			script.src = './build/'+jsName;
+			script.onload = function(){
+				console.log(jsName+'加载完毕');
+			};
+			document.head.appendChild(script);
+		}
+
+		(function(){
+			var i = 0,
+				length = 1000;
+			for(;i<length;i++){
+				appendScript('index'+i+'.js')
+			}	
+		}());
+
+	</script>
+</body>
+</html>
