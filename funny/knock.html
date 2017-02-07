@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>打字超爽</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		html,body{
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+			overflow: auto;
+			font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi MicroHei", sans-serif;
+		}
+		.editContain{
+			width:40rem;
+			height: 30rem;
+			margin: 10rem auto;
+			background: #FBE2C1;
+			border-radius:0.25rem;
+			box-shadow: 2px 2px 5px 1px #D1E0EB;
+			outline: none;
+			padding: 2rem;
+		}
+		.editContain :focus{
+			will-change:transform;
+		}
+		.animation{
+			animation: shake 0.2s ease;
+		}
+		.numColor{
+			color:red;
+		}
+		.strColor{
+			color:blue;
+		}
+		.chnColor{
+			color:green;
+		}
+		@keyframes shake{
+			from{
+				transform: translate(0,0);
+			}
+			20%{
+				transform: translate(-0.25rem,0);
+				box-shadow: 2px 2px 7px 2px #D1E0EB;
+			}
+			40%{
+				transform: translate(0,-0.25rem);
+				box-shadow: 2px 2px 9px 3px #D1E0EB;
+			}
+			60%{
+				transform: translate(0.25rem,0);
+				box-shadow: 2px 2px 9px 3px #D1E0EB;
+			}
+			80%{
+				transform: translate(0),0.25rem;
+				box-shadow: 2px 2px 7px 2px #D1E0EB;
+			}
+			to{
+				transform: translate(0,0);
+				box-shadow: 2px 2px 5px 1px #D1E0EB;
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div id="contain" class="editContain" contenteditable="true">
+		
+	</div>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+	(function(){
+		var contain = $('#contain'),
+			id = 0 ;
+		contain.off('keydown').on('keydown',function(e){
+			contain.addClass('animation');
+			contain.off('keyup').on('keyup',function(e){
+				contain.removeClass('animation');
+			});
+		});
+		contain.off('off').on('input',function(e){
+			var reg = /\d+|[a-zA-Z]+|[\u4e00-\u9fa5]+/g,
+				val = contain.text(),
+				arr = val.match(reg),
+				i = 0,
+				html = '',
+				htmlArr = [],
+				childReg = /(\d*)([a-zA-Z]*)([\u4e00-\u9fa5]*)/,
+				childArr = [],
+				fn = arguments.callee,
+				length = arr && arr.length;
+			/*if(/[a-zA-Z]/.test(e.key)){
+				window.clearTimeout(id);
+				id = window.setTimeout(function(){
+					fn();
+				},800);
+				return;
+			}*/
+			for(;i<length;i++){
+				childArr = childReg.exec(arr[i]);
+				
+				htmlArr.push('<span class="'+(childArr[1]?'numColor':'')+(childArr[2]?'strColor':'')+(childArr[3]?'chnColor':'')+'">'+arr[i]+'</span>');
+			}
+			contain.html(htmlArr.join(''));
+		});
+	}())
+</script>
+</body>
+</html>
+
+
+
+
+
+
