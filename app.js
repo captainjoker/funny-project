@@ -3,6 +3,7 @@ var url = require('url');
 var join = require('path').join;
 var parse = url.parse;
 var fs = require('fs');
+var servernew = require('./server/server');
 var root = __dirname;
 
 var server = {
@@ -42,6 +43,6 @@ var server = {
 
 };
 
-server.run();
-
+//server.run();
+servernew.run(root);
 module.exports = server;

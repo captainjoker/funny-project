@@ -16,57 +16,56 @@ const server = {
 				break;
 			}
 		}
-		if(pathname == '\/' || pathname == '\\' || !pathname){
+		if(pathname == '/'  || !pathname){
 			isStatic = true;
 		}
 		return isStatic;
 	},
-	run() {
+	run(rootPath) {
 		console.log(config.port);
 		http.createServer((req, res) => {
 			let realurl = url.parse(req.url);
 			//是否静态文件
 			if (server.isStatic(realurl.pathname)) {
 				console.log(realurl);
-				let pathname = (realurl.pathname == '\/' || realurl.pathname == '\\' || !realurl.pathname) ? 'index.html' : realurl.pathname.replace(/\.\./g, ''),
-					realPath = path.join(config.root, pathname),
-					ext = path.extname(realPath);
+				let pathname = (realurl.pathname == '/' || !realurl.pathname) ? 'index.html' : realurl.pathname.replace(/\.\./g, ''),
+					file_Path = path.join(rootPath, pathname),
+					ext = path.extname(file_Path);
 				ext = ext ? ext.slice(1) : 'unknown';
-				console.log(realPath);
-				fs.stat(realPath, (err, stat) => {
+				console.log(file_Path);
+				fs.stat(file_Path, (err, stat) => {
 					if (err) {
 						console.log('error');
 						if (err.code == 'ENOENT') {
-							res.statusCode = 404;
-							res.end();
+							res.writeHead(404,'Not Found', {'Content-Type': 'text/plain'});
 						} else {
-							res.statusCode = 500;
-							res.end('Internal Server Error');
+							res.writeHead(500,'Internal Server Error', {'Content-Type': 'text/plain'});
 						}
-
+						res.end();
 					} else {
 						res.setHeader('Content-Length', stat.size);
-						console.log(mine.get(ext));
 						res.setHeader('Content-Type', mine.get(ext) || 'text/plain');
-						var stream = fs.createReadStream(realPath);
+						res.statusCode = 200;
+						var stream = fs.createReadStream(file_Path);
 						stream.pipe(res);
 						stream.on('error', function(err) {
-							res.statusCode = 500;
-							res.end('Internal Server Error');
+							res.writeHead(500,'Internal Server Error', {'Content-Type': 'text/plain'});
+							res.end();
 							console.log('找不到静态文件');
 						});
 					}
 				});
 			} else {
-				res.end('request is not static file');
 				//不是静态文件
+				res.writeHead(404,'Not Found', {'Content-Type': 'text/plain'});
+				res.end();
 			}
 		}).listen(config.port);
 		console.log('HTTP server is listening at port ${config.port}');
 	}
 };
 
-server.run();
+//server.run();
 
 module.exports = server;
 

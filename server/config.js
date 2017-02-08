@@ -4,11 +4,12 @@ const config = {
 		'css': 'style',
 		'font': 'font',
 		'script': 'script',
-		'img': 'img'
+		'img': 'img',
+		'favicon': 'favicon.ico'
 	},
 	'root': '/Users/cj/project/funny-project/src',
 	'port': 3002,
 	'404': 'error.html'
-}
+};
 
 module.exports = config;
