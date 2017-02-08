@@ -44,5 +44,5 @@ var server = {
 };
 
 //server.run();
-servernew.run(root);
+servernew.run();
 module.exports = server;

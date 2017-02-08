@@ -5,10 +5,12 @@ const config = {
 		'font': 'font',
 		'script': 'script',
 		'img': 'img',
+		'music':'music',
 		'favicon': 'favicon.ico'
 	},
-	'root': '/Users/cj/project/funny-project/src',
-	'port': 3002,
+	'root': __dirname,
+	'static_dir': 'src',
+	'port': 3000,
 	'404': 'error.html'
 };
 
