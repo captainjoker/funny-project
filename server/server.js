@@ -8,16 +8,9 @@ var root = __dirname;
 var num = 0;
 const server = {
 	isStatic(pathname) {
-		let isStatic = false;
-		skeys = Object.keys(config.static);
-		for (let k of skeys) {
-			console.log(config.static[k]);
-			if (pathname.indexOf(config.static[k]) != -1) {
-				isStatic = true;
-				break;
-			}
-		}
-		if (pathname == '/' || !pathname) {
+		let isStatic = false,
+			patt = new RegExp(config.static_match, 'ig');
+		if (pathname == '/' || !pathname || patt.test(pathname)) {
 			isStatic = true;
 		}
 		return isStatic;
@@ -44,18 +37,34 @@ const server = {
 						}
 						res.end();
 					} else {
-						res.setHeader('Content-Length', stat.size);
-						res.setHeader('Content-Type', mine.get(ext) || 'text/plain');
-						res.statusCode = 200;
-						var stream = fs.createReadStream(file_Path);
-						stream.pipe(res);
-						stream.on('error', function(err) {
-							res.writeHead(500, 'Internal Server Error', {
-								'Content-Type': 'text/plain'
-							});
+						let last_modified = stat.mtime.toUTCString();
+						res.setHeader('Last-Modified', last_modified);
+						console.log('last_modified: '+last_modified);
+						if (ext.match(config.file_match)) {
+							let expires = new Date();
+							expires.setTime(expires.getTime() + config.max_age * 1000);
+							res.setHeader('Expires', expires.toUTCString());
+							res.setHeader('Cache-Control', 'max-age=' + config.max_age);
+						}
+						console.log('req.headers[if-modified-since]:'+req.headers);
+						if (req.headers['if-modified-since'] && req.headers['if-modified-since'] == last_modified) {
+							res.writeHead(304, 'Not Modified');
 							res.end();
-							console.log('找不到静态文件');
-						});
+						} else {
+							res.setHeader('Content-Length', stat.size);
+							res.setHeader('Content-Type', mine.get(ext) || 'text/plain');
+							res.statusCode = 200;
+							var stream = fs.createReadStream(file_Path);
+							stream.pipe(res);
+							stream.on('error', function(err) {
+								res.writeHead(500, 'Internal Server Error', {
+									'Content-Type': 'text/plain'
+								});
+								res.end();
+								console.log('找不到静态文件');
+							});
+						}
+
 					}
 				});
 			} else {
@@ -66,7 +75,7 @@ const server = {
 				res.end();
 			}
 		}).listen(config.port);
-		console.log('HTTP server is listening at port '+config.port);
+		console.log('HTTP server is listening at port ' + config.port);
 	}
 };
 
